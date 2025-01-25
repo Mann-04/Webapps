@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sky to Soil</title>
+    <link rel="stylesheet" href="style_main.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector(".registration-form");
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                alert("Information has been stored successfully!");
+                const formData = new FormData(form);
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
+                });
+                console.log("Stored Data:", data);
+            });
+        });
+    </script>
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#aboutus">About Us</a>
+        <a href="#what">What We Do</a>
+        <a href="#pick">Take Your Pick</a>
+        <a href="#contact">Contact Us</a>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home" style="color: white;">
+        <div class="video-background">
+            <video autoplay muted loop playsinline>
+                <source src="/videoplayback (1).mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>        
+        <div class="container">
+            <h1>Welcome to Sky to Soil</h1>
+            <p>Your destination for advanced meteorological analysis and sustainable farming solutions.</p>
+        </div>
+    </section>
+    <section id="aboutus" style="background-color: #2ECC40; color: rgb(0, 0, 0);">
+        <div class="container">
+            <h1>About Us</h1>
+            <p>We are passionate data scientist that seeks to empower agricultural practitioners and
+                enterprises. The primary objective encompasses advanced meteorological analysis and forecasting, aimed at delivering solutions
+                that enhance crop yield and optimize water resource management. <br><br>
+                We are primarily based of Bengaluru, and plan onexpanding our offices to more rural locations of India where majority of our cliental are situated.
+            </p> &nbsp;<img src="/aboutus.png" alt="image1">
+        </div>
+    </section>
+
+    <!-- What can we do for you page -->
+    <section id="what" style="background-color: #98d9008f; color: white;">
+        <div class="container">
+            <h2>What can we do for you?</h2>
+            <p>We will furnish real-time meteorological reports, archivalclimate data, and predictive weather models alongsidegroundwater level assessments.</p>
+            <div class="images-grid">
+                <a href="https://www.ibm.com/think/topics/weather-models" target="_blank"><img src="/weather.png" alt="Forecast modeling">Forecast Modeling</a>
+                <a href="https://www.sciencedirect.com/topics/earth-and-planetary-sciences/groundwater-assessment" target="_blank"><img src="/ground.png" alt="Groundwater Assessment">Groundwatertesting</a>
+                <a href="https://eos.com/blog/soil-testing/" target="_blank"><img src="/soiltesting.png" alt="Soil Testing">Soil testing</a>
+                <a href="https://wint.ai/glossary/water-management/" target="_blank"><img src="/water.png" alt="Water Management">Water Management</a>
+                <a href="https://www.britannica.com/technology/sustainable-agriculture" target="_blank"><img src="/sustainable_agriculture_in_india.png" alt="sustainable Farming">Sustainable Farming solutions</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Take your pick page -->
+    <section id="pick" style="background-color: #2ECC40; color: white;">
+        <div class="container">
+            <h2>Take Your Pick</h2>
+            <div class="images-grid">
+                <a href="/registration.html" target="_blank"><img src="/serv1.png" alt="Full package">Full Package</a><br>
+                <a href="/registration.html" target="_blank"><img src="/serv2.png" alt="Soil Evaluation"> Soil Evaluation</a><br>
+                <a href="/registration.html" target="_blank"><img src="/serv3.png" alt="Water Management"> Water Management</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+     <section id="contact" style="background-color: black; color: white;">
+        <div class="footer">
+            <div class="links">
+                <p><a href="https://linkedin.com" target="_blank">LinkedIn</a></p>
+                <p><a href="mailto:support@stos.com">Email Us</a></p>
+            </div>
+            <div class="location">
+                <a href="https://maps.google.com" target="_blank"><img src="/bengaluru.png" alt="Map"></a>
+                <p>Location:<br>123 Anywhere St., Bengaluru</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

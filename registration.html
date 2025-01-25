@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Registration</title>
+</head>
+<style>
+    h1 {
+        text-align: center;
+        font-style: oblique;
+        color: rgb(0, 0, 0);
+    }
+    h2 {
+        text-align: justify;
+        font-style: oblique;
+        color: rgb(92, 7, 86);
+    }
+    h3 {
+        text-align: left;
+        font-style: normal;
+        color: rgb(193, 19, 164);
+        padding: 5px;
+    }
+    input[type=text], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    button {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    button[type="submit"] {
+        background: linear-gradient(135deg, rgb(7, 207, 50), rgba(27, 129, 1, 0.76));
+        color: rgb(0, 0, 0);
+        flex: 2;
+    }
+    button[type="reset"] {
+        background: linear-gradient(135deg, rgb(207, 7, 7), rgba(187, 14, 14, 0.781));
+        color: rgb(0, 0, 0);
+        flex: 2;
+    }
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px -1px rgb(0, 0, 0);
+    }
+    button:active {
+        transform: translateY(0);
+    }
+    div {
+        border-radius: 5px;
+        margin: auto;
+        background-color: #f2f2f2;
+        padding: 20px;
+        max-width: 600px;
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Collect form data
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get("name"),
+            Dob: formData.get("Dob"),
+            mobile: formData.get("mobile"),
+            gender: document.querySelector("input[name='gender']:checked")?.id,
+            service: document.querySelector("input[name='serv1']:checked")?.id,
+            doj: formData.get("doj"),
+            place: formData.get("place"),
+            address: formData.get("address"),
+            idType: formData.get("id"),
+            idNumber: formData.getAll("id")[1], // Get card number input
+            termsAccepted: document.getElementById("yes").checked
+        };
+
+        console.log("Submitting Data:", data);
+
+        // Send data to backend
+        fetch("http://localhost:5000/api/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log("Success:", result);
+            alert(result.message);
+            form.reset();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+        });
+    });
+});
+</script>
+<body bgcolor="#8f9c92">
+    <h1>Register Now</h1>
+    <div>
+        <form action="submit">
+            <h2>Registration:</h2>
+            <h3>User Information</h3>
+            Name:
+            <input type="text" name="name" placeholder="Enter your Name" required>
+            <br><br>
+            DOB:
+            <input type="date" name="Dob" placeholder="dd/mm/yyyy" required>
+            <br><br>
+            Mobile:
+            <input type="text" name="mobile" placeholder="Enter mobile number" value="+91" required>
+            <br><br>
+            Gender:<br>
+            <input type="radio" name="gender" id="male">Male<br>
+            <input type="radio" name="gender" id="female">Female<br>
+            <input type="radio" name="gender" id="others">Others<br>
+            <input type="radio" name="gender" id="dwtd">Do not wish to disclose
+            <br><br>
+            <h3>Services:</h3>
+            <input type="radio" name="serv1" id="serv1">Full Package<br>
+            <input type="radio" name="serv1" id="serv2">Soil Evaluation<br>
+            <input type="radio" name="serv1" id="serv3">Water Management<br>
+            <br>
+            Pick the date you are available to meet our team:
+            <input type="date" name="doj" placeholder="dd/mm/yyyy" required>
+            <br><br>
+            <label for="place">Address</label><br>
+            <select id="place" name="place" required>
+                <option value="Select" disabled selected>Select one of these options</option>
+                <option value="bengaluru">Bengaluru</option>
+                <option value="chennai">Chennai</option>
+                <option value="coimbatore">Coimbatore</option>
+                <option value="mangalore">Mangalore</option>
+                <option value="udipi">Udipi</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="nellore">Nellore</option>
+            </select>
+            <br><br>
+            <input type="text" name="address" id="address" placeholder="Enter your address">
+            <label for="id">Identity Card type:</label>
+            <select id="id" name="id" required>
+                <option value="Select" disabled selected>Select one of these options</option>
+                <option value="pan">PAN Card</option>
+                <option value="voter">Voter ID</option>
+                <option value="aadhaar">Aadhaar card</option>
+                <option value="passport">Passport</option>
+                <option value="driver">Driver's License</option>
+            </select>
+            <br>
+            <input type="text" name="id" placeholder="Enter card number" required>
+            <br><br>
+            <div>
+                I have read the <a href="/t&c.html" target="_blank">Terms and Conditions</a>
+                <input type="checkbox" name="yes" id="yes" required>
+            </div>
+            <div class="button-group">
+                <button type="submit" value="Submit">Submit</button>
+                <button type="reset">Reset Form</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
